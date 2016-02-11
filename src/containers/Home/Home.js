@@ -41,8 +41,7 @@ export default class Home extends Component {
                           width={160}
                           height={30}
                           count large/>
-            <Integrations wtf="wtf"
-                          idk="idk"/>
+            <Integrations />
             <p className={styles.humility}>
               Created and maintained by <a href="https://twitter.com/erikras" target="_blank">@erikras</a>.
             </p>
