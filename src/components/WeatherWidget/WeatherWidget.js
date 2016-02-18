@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 // const httpRequest = new XMLHttpRequest();
 
-
+const defineResponse = (query) => {
+  console.log(query);
+  const response = query;
+  console.log(response);
+  return response;
+};
 export default class WeatherWidget extends Component {
 
   componentDidMount() {
@@ -11,17 +16,20 @@ export default class WeatherWidget extends Component {
 
   pullData = function pullData() {
     const httpRequest = new XMLHttpRequest();
+    let thing = {};
     httpRequest.onreadystatechange = function() {
       if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
           console.log(JSON.parse(httpRequest.responseText));
-          const thing = JSON.parse(httpRequest.responseText);
+          thing = JSON.parse(httpRequest.responseText);
           console.log(thing);
           defineResponse(thing);
+
           console.log('wtf');
         } else {
           console.error(httpRequest.responseText);
         }
+        return thing;
       }
     };
     httpRequest.open(
@@ -32,23 +40,21 @@ export default class WeatherWidget extends Component {
 
     httpRequest.send();
     console.log(httpRequest.status);
+    return thing;
   }
 
-  defineResponse = function defineResponse(query) {
-    console.log(query);
-    const response = query;
-    console.log(response);
-  }
+
   alertContents = function alertContents() {
 
   }
 
   render() {
-    return (
-              <div className="wtfs">
-                <p>This is the integrations area</p>
-              </div>
-          );
+      return (
+          <div className="weather">
+            <p>{this.pullData()}</p>
+            <p>This is the integrations area</p>
+          </div>
+      );
   }
 
 
