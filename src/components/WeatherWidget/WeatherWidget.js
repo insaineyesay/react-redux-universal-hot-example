@@ -5,7 +5,6 @@ import React, {Component} from 'react';
 export default class WeatherWidget extends Component {
 
   componentDidMount() {
-    const defineResponse = {};
     this.pullData();
   }
 
@@ -35,7 +34,11 @@ export default class WeatherWidget extends Component {
     console.log(httpRequest.status);
   }
 
-
+  defineResponse = function defineResponse(query) {
+    console.log(query);
+    const response = query;
+    console.log(response);
+  }
   alertContents = function alertContents() {
 
   }
