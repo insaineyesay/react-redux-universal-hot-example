@@ -8,7 +8,12 @@ const defineResponse = (query) => {
   return response;
 };
 export default class WeatherWidget extends Component {
-
+  constructor() {
+    super();
+    // this.pullData = this.pullData.bind(this);
+    // this.defineResponse = this.defineResponse.bind(this);
+    this.thing = {};
+  }
   componentDidMount() {
     this.pullData();
   }
@@ -16,20 +21,20 @@ export default class WeatherWidget extends Component {
 
   pullData = function pullData() {
     const httpRequest = new XMLHttpRequest();
-    let thing = {};
-    httpRequest.onreadystatechange = function() {
+
+    httpRequest.onreadystatechange = () => {
       if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
           console.log(JSON.parse(httpRequest.responseText));
-          thing = JSON.parse(httpRequest.responseText);
-          console.log(thing);
-          defineResponse(thing);
+          this.thing = JSON.parse(httpRequest.responseText);
+          console.log(this.thing);
+          defineResponse(this.thing);
 
           console.log('wtf');
         } else {
           console.error(httpRequest.responseText);
         }
-        return thing;
+        return this.thing;
       }
     };
     httpRequest.open(
@@ -40,21 +45,15 @@ export default class WeatherWidget extends Component {
 
     httpRequest.send();
     console.log(httpRequest.status);
-    return thing;
-  }
-
-
-  alertContents = function alertContents() {
-
+    return this.thing;
   }
 
   render() {
-      return (
-          <div className="weather">
-            <p>{this.pullData()}</p>
-            <p>This is the integrations area</p>
-          </div>
-      );
+    return (
+        <div className="weather">
+          <p>This is the integrations area</p>
+        </div>
+    );
   }
 
 
