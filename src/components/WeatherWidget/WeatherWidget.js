@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+// import fetch from 'isomorphic-fetch';
 // const httpRequest = new XMLHttpRequest();
 
 const defineResponse = (query) => {
@@ -8,11 +9,14 @@ const defineResponse = (query) => {
   return response;
 };
 export default class WeatherWidget extends Component {
-  constructor() {
-    super();
+
+  constructor(props) {
+    super(props);
     // this.pullData = this.pullData.bind(this);
     // this.defineResponse = this.defineResponse.bind(this);
-    this.thing = {};
+    // this.state = {
+    //   data: this.thing
+    // };
   }
   componentDidMount() {
     this.pullData();
@@ -20,6 +24,7 @@ export default class WeatherWidget extends Component {
 
 
   pullData = function pullData() {
+    console.log('wtf is happening');
     const httpRequest = new XMLHttpRequest();
 
     httpRequest.onreadystatechange = () => {
@@ -49,8 +54,11 @@ export default class WeatherWidget extends Component {
   }
 
   render() {
+    console.log(this);
+    const weatherData = this.thing.query.results.channel.description;
     return (
         <div className="weather">
+          <p>{weatherData}</p>
           <p>This is the integrations area</p>
         </div>
     );
@@ -60,4 +68,6 @@ export default class WeatherWidget extends Component {
 }
 WeatherWidget.propTypes = {
   url: React.PropTypes.string.isRequired
+  // state: React.PropTypes.string,
+  // city: React.PropTypes.string
 };
